@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">28dp</dimen>
+
+    <!-- Font size -->
+    <dimen name="font_body">14sp</dimen>
+
+    <dimen name="item_apps_height">72dp</dimen>
+    <dimen name="item_apps_icon_size">48dp</dimen>
+    <dimen name="item_apps_padding">16dp</dimen>
+    <dimen name="item_apps_divide">8dp</dimen>
+
+</resources>

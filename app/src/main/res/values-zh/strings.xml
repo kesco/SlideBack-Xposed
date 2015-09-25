@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">拖拽手势Xposed插件</string>
+    <string name="action_settings">设置</string>
+</resources>
