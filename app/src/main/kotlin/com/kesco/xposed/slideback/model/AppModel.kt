@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import com.kesco.xposed.slideback.domain.AppInfo
 import com.kesco.xposed.slideback.domain.genAppInfo
+import com.kesco.xposed.slideback.domain.getInstalledPackagesAppCompat
 import rx.Observable
 import rx.Subscriber
 import rx.observers.Subscribers
@@ -21,7 +22,7 @@ class AppModelImpl(val ctx: Context) : AppModel {
 
     override fun data(): Observable<List<AppInfo>> {
         return Observable.create { subscriber ->
-            val packs = ctx.packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
+            val packs = ctx.packageManager.getInstalledPackagesAppCompat(PackageManager.GET_ACTIVITIES)
             val slideAppStrList = loadSlideAppsList()
             for (pack in packs) {
                 if (pack.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) {

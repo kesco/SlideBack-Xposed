@@ -23,7 +23,7 @@ class AppAdapter(val ctx: Context) : RecyclerView.Adapter<AppAdapter.AppVH>() {
     val layoutInflater: LayoutInflater
 
     private val _apps = ArrayList<AppInfo>()
-    var listener:OnCheckListener? = null
+    var listener: OnCheckListener? = null
 
     var applist: List<AppInfo>
         get() = _apps
@@ -47,9 +47,10 @@ class AppAdapter(val ctx: Context) : RecyclerView.Adapter<AppAdapter.AppVH>() {
         holder.tvAppName.text = app.name
         holder.ivAppIcon.setImageDrawable(app.icon)
         holder.switchLock.setChecked(app.doSlide)
-        holder.switchLock.setOnCheckedChangeListener { switch, ok ->
-            app.doSlide = ok
-            listener?.onCheckChanged(app, ok)
+        holder.switchLock.setOnClickListener { v ->
+            app.doSlide = !app.doSlide
+            holder.switchLock.setChecked(app.doSlide)
+            listener?.onCheckChanged(app, app.doSlide)
         }
     }
 
