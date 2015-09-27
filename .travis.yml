@@ -6,6 +6,9 @@ android:
     - extra-android-support
     - extra-android-m2repository
 
+git:
+        submodules: false
+
 before_install:
     - echo "Init Git Submodule --Start"
     - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
