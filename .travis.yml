@@ -1,0 +1,18 @@
+language: android
+android:
+  components:
+    - build-tools-22.0.1
+    - android-23
+    - extra-android-support
+    - extra-android-m2repository
+
+before_script:
+    - echo "Init Git Submodule --Start"
+    - git submodule init && git submodule update
+    - echo "Init Git Submodule --Done"
+
+script: 
+    - echo "Build APK --Start"
+    - ./gradlew assembleDebug
+    - echo "Build APK --Done"
+

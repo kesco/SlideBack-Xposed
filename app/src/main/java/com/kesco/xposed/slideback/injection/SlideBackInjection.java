@@ -105,7 +105,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         Window win = act.getWindow();
         ViewGroup decorView = (ViewGroup) win.getDecorView();
         Drawable bg = decorView.getBackground();
-        act.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        win.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         decorView.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         View screenView = decorView.getChildAt(0);
         decorView.removeViewAt(0);
