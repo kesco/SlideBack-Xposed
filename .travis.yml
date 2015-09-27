@@ -6,10 +6,11 @@ android:
         - android-23
         - extra-android-m2repository
         - extra-android-support
+        - sys-img-armeabi-v7a-android-22
 git:
     submodules: false
 before_install:
     - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
     - git submodule init && git submodule update
-install: 
+script: 
     - ./gradlew build
