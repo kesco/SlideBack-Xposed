@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import com.kesco.xposed.slideback.domain.AppInfo
 import com.kesco.xposed.slideback.domain.genAppInfo
 import com.kesco.xposed.slideback.domain.getInstalledPackagesAppCompat
+import com.kesco.xposed.slideback.domain.saveAppInfo
 import rx.Observable
 import rx.Subscriber
 import rx.observers.Subscribers
@@ -43,6 +44,7 @@ class AppModelImpl(val ctx: Context) : AppModel {
                 slideAppStrList.remove(app.pack)
             }
             insertSlideAppsList(slideAppStrList)
+            saveAppInfo(ctx, app)
         }
     }
 

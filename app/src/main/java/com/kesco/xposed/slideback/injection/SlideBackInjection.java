@@ -1,6 +1,7 @@
 package com.kesco.xposed.slideback.injection;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import com.kesco.adk.moko.slideback.SlideLayout;
 import com.kesco.adk.moko.slideback.SlideListener;
 import com.kesco.adk.moko.slideback.SlideState;
 import com.kesco.adk.moko.slideback.SlidebackPackage;
+import com.kesco.xposed.slideback.domain.AppInfo;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,12 +67,27 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         }
         String actName = actClazz == null ? STR_ACTIVITY : STR_APPCOMPAT;
 
-        XposedHelpers.findAndHookMethod(actName, lpparam.classLoader, "setContentView", "int", new XC_MethodHook() {
+        AppInfo app = loadAppInfo(lpparam.packageName);
+        Set<String> activities = app.getAvaliableSlideActivities();
+        XC_MethodHook onCreateHookCallBack = new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 attachSlideLayout((Activity) param.thisObject);
             }
-        });
+        };
+
+        for (String act : activities) {
+            XposedHelpers.findAndHookMethod(act, lpparam.classLoader, "onCreate", Bundle.class, onCreateHookCallBack);
+        }
+
+
+
+//        XposedHelpers.findAndHookMethod(actName, lpparam.classLoader, "setContentView", "int", new XC_MethodHook() {
+//            @Override
+//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                attachSlideLayout((Activity) param.thisObject);
+//            }
+//        });
         XposedHelpers.findAndHookMethod(actName, lpparam.classLoader, "onPostCreate", Bundle.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -166,5 +183,17 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
             if (ret = app.equals(item)) break;
         }
         return ret;
+    }
+
+    private AppInfo loadAppInfo(String packageName) {
+        String prefName = packageName.replace(".", "_");
+        SharedPreferences pref = new XSharedPreferences("com.kesco.xposed.slideback", prefName);
+        String name = pref.getString("name", "");
+        String pack = pref.getString("pack", "");
+        boolean doSlide = pref.getBoolean("do_slide", false);
+        AppInfo app = new AppInfo(name, pack, null, doSlide);
+        app.setAvaliableSlideActivities(pref.getStringSet("avaliable_slide_activities", new HashSet<String>()));
+
+        return app;
     }
 }
