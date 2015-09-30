@@ -38,9 +38,6 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
     private static final String FILTER_PREFIX_ANDROID = "android";
     private static final String FILTER_PREFIX_COM_ANDROID = "com.android";
 
-    private static final String STR_ACTIVITY = "android.app.Activity";
-    private static final String STR_APPCOMPAT = "android.support.v7.app.AppCompatActivity";
-
     private static String modPath;
 
     private XSharedPreferences pref = null;
@@ -59,14 +56,6 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
             return;
         }
 
-        Class actClazz;
-        try {
-            actClazz = XposedHelpers.findClass(STR_APPCOMPAT, lpparam.classLoader);
-        } catch (XposedHelpers.ClassNotFoundError e) {
-            actClazz = null;
-        }
-        String actName = actClazz == null ? STR_ACTIVITY : STR_APPCOMPAT;
-
         AppInfo app = loadAppInfo(lpparam.packageName);
         Set<String> activities = app.getAvaliableSlideActivities();
         XC_MethodHook onCreateHookCallBack = new XC_MethodHook() {
@@ -80,15 +69,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
             XposedHelpers.findAndHookMethod(act, lpparam.classLoader, "onCreate", Bundle.class, onCreateHookCallBack);
         }
 
-
-
-//        XposedHelpers.findAndHookMethod(actName, lpparam.classLoader, "setContentView", "int", new XC_MethodHook() {
-//            @Override
-//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                attachSlideLayout((Activity) param.thisObject);
-//            }
-//        });
-        XposedHelpers.findAndHookMethod(actName, lpparam.classLoader, "onPostCreate", Bundle.class, new XC_MethodHook() {
+        XposedHelpers.findAndHookMethod("android.app.Activity", lpparam.classLoader, "onPostCreate", Bundle.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 Activity act = (Activity) param.thisObject;
