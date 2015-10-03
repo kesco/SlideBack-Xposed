@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">拖拽手势Xposed插件</string>
-    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
+    <string name="app_source">应用源代码</string>
+    <string name="open_source_license">开源协议</string>
+    <string name="app_version">版本0.1.0</string>
+    <string name="software_license">软件协议</string>
+    <string name="open_source_used">使用的开源源代码</string>
 </resources>

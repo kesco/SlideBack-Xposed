@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">SlideBack Xposed Plugin</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name" translatable="false">SlideBack</string>
+    <string name="action_about">About</string>
+
+    <!--About Dialog-->
+    <string name="app_version">Version 0.1.0</string>
+    <string name="app_source">SlideBack code source</string>
+    <string name="open_source_license">Open Source License</string>
+    <string name="open_source_used">Open Source codes used with SlideBack</string>
+
+    <string name="software_license">Software License</string>
+    <string name="xpose_framework" translatable="false">Xposed FrameWork</string>
+    <string name="apache_license" translatable="false">Apache License, Version 2.0</string>
 </resources>

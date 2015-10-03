@@ -19,6 +19,7 @@ import com.kesco.xposed.slideback.model.AppModelImpl
 import com.kesco.xposed.slideback.presenter.AppPresenter
 import com.kesco.xposed.slideback.presenter.AppPresenterImpl
 import com.kesco.xposed.slideback.view.adapter.AppAdapter
+import com.kesco.xposed.slideback.view.dialog.AboutDialog
 import com.kesco.xposed.slideback.view.recycleview.LineDividerItemDecoration
 import rx.Observable
 import rx.Subscriber
@@ -55,7 +56,9 @@ public class MainActivity : AppCompatActivity(), AppView, AppAdapter.OnCheckList
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            val dialog = AboutDialog()
+            dialog.show(supportFragmentManager, "about_dialog")
             return true
         }
         return super.onOptionsItemSelected(item)

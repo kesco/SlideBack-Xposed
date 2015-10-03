@@ -1,12 +1,17 @@
 <resources>
-    <dimen name="fab_margin">28dp</dimen>
-
     <!-- Font size -->
+    <dimen name="font_title">20sp</dimen>
+    <dimen name="font_subhead">16sp</dimen>
     <dimen name="font_body">14sp</dimen>
 
+    <!--Apps List -->
     <dimen name="item_apps_height">72dp</dimen>
     <dimen name="item_apps_icon_size">48dp</dimen>
     <dimen name="item_apps_padding">16dp</dimen>
     <dimen name="item_apps_divide">8dp</dimen>
+
+    <!--About Dialog-->
+    <dimen name="item_about_dialog_padding_horizontal">24dp</dimen>
+    <dimen name="item_about_dialog_padding_vertical">16dp</dimen>
 
 </resources>
