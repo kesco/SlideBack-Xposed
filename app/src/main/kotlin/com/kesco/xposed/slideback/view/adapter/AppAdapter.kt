@@ -1,7 +1,6 @@
 package com.kesco.xposed.slideback.view.adapter
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import android.widget.TextView
 import com.kesco.adk.ui.bindViewById
 import com.kesco.xposed.slideback.R
 import com.kesco.xposed.slideback.domain.AppInfo
-import java.util
 import java.util.*
 
 class AppAdapter(val ctx: Context) : RecyclerView.Adapter<AppAdapter.AppVH>() {
