@@ -66,7 +66,11 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         };
 
         for (String act : activities) {
-            XposedHelpers.findAndHookMethod(act, lpparam.classLoader, "onCreate", Bundle.class, onCreateHookCallBack);
+            try {
+                XposedHelpers.findAndHookMethod(act, lpparam.classLoader, "onCreate", Bundle.class, onCreateHookCallBack);
+            } catch (Throwable throwable) {
+                // TODO: 目前这样做法性能损耗比较大，下步改进attachSlideLayout的注入方式
+            }
         }
 
         XposedHelpers.findAndHookMethod("android.app.Activity", lpparam.classLoader, "onPostCreate", Bundle.class, new XC_MethodHook() {
