@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">SlideBack</string>
     <string name="action_about">About</string>
+    <string name="action_show_system_app">Show System Apps</string>
 
     <!--About Dialog-->
     <string name="app_version">Version 0.1.0</string>

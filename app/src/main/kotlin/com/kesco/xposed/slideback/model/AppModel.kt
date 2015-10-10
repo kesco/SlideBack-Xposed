@@ -16,6 +16,8 @@ import java.util.*
 interface AppModel {
     fun data(): Observable<List<AppInfo>>
     fun changeAppState(): Subscriber<AppInfo>
+    fun showSystemApp(): Boolean
+    fun showSystemApp(ok: Boolean)
 }
 
 class AppModelImpl(val ctx: Context) : AppModel {
@@ -25,9 +27,16 @@ class AppModelImpl(val ctx: Context) : AppModel {
         return Observable.create { subscriber ->
             val packs = ctx.packageManager.getInstalledPackagesAppCompat(PackageManager.GET_ACTIVITIES)
             val slideAppStrList = loadSlideAppsList()
+            apps.clear()
             for (pack in packs) {
-                if (pack.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) {
-                    apps.add(genAppInfo(ctx, pack, pack.packageName in slideAppStrList))
+                if (showSystemApp()) {
+                    if (ctx.packageManager.getLaunchIntentForPackage(pack.packageName) != null) {
+                        apps.add(genAppInfo(ctx, pack, pack.packageName in slideAppStrList))
+                    }
+                } else {
+                    if (pack.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) {
+                        apps.add(genAppInfo(ctx, pack, pack.packageName in slideAppStrList))
+                    }
                 }
             }
             subscriber.onNext(apps)
@@ -46,6 +55,14 @@ class AppModelImpl(val ctx: Context) : AppModel {
             insertSlideAppsList(slideAppStrList)
             saveAppInfo(ctx, app)
         }
+    }
+
+    override fun showSystemApp(): Boolean = loadPref().getBoolean("show_system_app", false)
+
+    override fun showSystemApp(ok: Boolean) {
+        val editor = loadPref().edit()
+        editor.putBoolean("show_system_app", ok)
+        editor.commit()
     }
 
     private fun loadPref(): SharedPreferences = ctx.getSharedPreferences("app_settings", Context.MODE_WORLD_READABLE)

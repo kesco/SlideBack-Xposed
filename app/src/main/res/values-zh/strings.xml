@@ -6,4 +6,5 @@
     <string name="app_version">版本0.1.0</string>
     <string name="software_license">软件协议</string>
     <string name="open_source_used">使用的开源源代码</string>
+    <string name="action_show_system_app">显示系统应用</string>
 </resources>

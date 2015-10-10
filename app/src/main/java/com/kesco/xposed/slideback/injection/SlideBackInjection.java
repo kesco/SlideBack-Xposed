@@ -52,7 +52,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if (filterSystemApp(lpparam.packageName) || !filterSlideApp(lpparam.packageName)) {
+        if (!filterSlideApp(lpparam.packageName)) {
             return;
         }
 
@@ -84,7 +84,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
 
     @Override
     public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
-        if (filterSystemApp(resparam.packageName) || !filterSlideApp(resparam.packageName)) {
+        if (!filterSlideApp(resparam.packageName)) {
             return;
         }
         XResources res = resparam.res;
@@ -167,6 +167,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         for (String item : loadSlideAppStrList()) {
             if (ret = app.equals(item)) break;
         }
+        XposedUtil.log("%s is %s to be slided.", app, ret ? "able" : "not able");
         return ret;
     }
 
