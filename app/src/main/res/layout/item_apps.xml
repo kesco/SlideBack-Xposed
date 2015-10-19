@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="@dimen/item_apps_height"
-    android:paddingLeft="@dimen/item_apps_padding"
-    android:paddingRight="@dimen/item_apps_padding">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/item_apps_height"
+                android:paddingLeft="@dimen/item_apps_padding"
+                android:paddingRight="@dimen/item_apps_padding"
+                android:focusable="true"
+                android:clickable="true"
+                android:background="@drawable/bg_common_item">
 
-    <ImageView
-        android:id="@+id/iv_app_icon"
-        android:layout_width="@dimen/item_apps_icon_size"
-        android:layout_height="@dimen/item_apps_icon_size"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/item_apps_divide"
-        android:scaleType="centerCrop" />
+  <ImageView
+      android:id="@+id/iv_app_icon"
+      android:layout_width="@dimen/item_apps_icon_size"
+      android:layout_height="@dimen/item_apps_icon_size"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="@dimen/item_apps_divide"
+      android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/tv_app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/item_apps_divide"
-        android:layout_toLeftOf="@+id/switch_lock"
-        android:layout_toRightOf="@+id/iv_app_icon"
-        android:textSize="@dimen/font_body" />
+  <TextView
+      android:id="@+id/tv_app_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="@dimen/item_apps_divide"
+      android:layout_toLeftOf="@+id/switch_lock"
+      android:layout_toRightOf="@+id/iv_app_icon"
+      android:textSize="@dimen/font_body"/>
 
-    <Switch
-        android:id="@+id/switch_lock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+  <Switch
+      android:id="@+id/switch_lock"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"/>
 </RelativeLayout>
