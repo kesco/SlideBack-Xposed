@@ -16,7 +16,7 @@ import com.kesco.adk.moko.slideback.SlideEdge;
 import com.kesco.adk.moko.slideback.SlideLayout;
 import com.kesco.adk.moko.slideback.SlideListener;
 import com.kesco.adk.moko.slideback.SlideState;
-import com.kesco.adk.moko.slideback.SlidebackPackage;
+import com.kesco.adk.moko.slideback.SliderKt;
 import com.kesco.xposed.slideback.domain.AppInfo;
 
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +77,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 Activity act = (Activity) param.thisObject;
-                SlidebackPackage.convertActivityToTranslucent(act);
+                SliderKt.convertActivityToTranslucent(act);
             }
         });
     }
@@ -132,7 +132,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
                 act.overridePendingTransition(0, 0);
             }
         });
-        SlidebackPackage.convertActivityFromTranslucent(act);
+        SliderKt.convertActivityFromTranslucent(act);
     }
 
     private Set<String> loadSlideAppStrList() {

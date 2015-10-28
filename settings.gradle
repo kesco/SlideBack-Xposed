@@ -1,4 +1,4 @@
 include ':app'
 include ':adk'
-project(':adk').projectDir = new File('SlideBack/adk')
+// project(':adk').projectDir = new File('SlideBack/adk')
 include ':SlideBack:library'
