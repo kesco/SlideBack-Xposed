@@ -15,6 +15,7 @@ import android.view.Window;
 import com.kesco.adk.moko.slideback.SlideEdge;
 import com.kesco.adk.moko.slideback.SlideLayout;
 import com.kesco.adk.moko.slideback.SlideListener;
+import com.kesco.adk.moko.slideback.SlideShadow;
 import com.kesco.adk.moko.slideback.SlideState;
 import com.kesco.adk.moko.slideback.SliderKt;
 import com.kesco.xposed.slideback.domain.AppInfo;
@@ -111,7 +112,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         decorView.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         View screenView = decorView.getChildAt(0);
         decorView.removeViewAt(0);
-        SlideLayout slideLayout = new SlideLayout(act, screenView);
+        SlideLayout slideLayout = new SlideLayout(act, screenView, SlideShadow.FULL);
         slideLayout.addView(screenView);
         decorView.addView(slideLayout, 0);
         screenView.setBackgroundDrawable(bg);
