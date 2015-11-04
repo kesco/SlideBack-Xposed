@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,7 +16,9 @@ import android.view.Window;
 import com.kesco.adk.moko.slideback.SlideEdge;
 import com.kesco.adk.moko.slideback.SlideLayout;
 import com.kesco.adk.moko.slideback.SlideListener;
+import com.kesco.adk.moko.slideback.SlideShadow;
 import com.kesco.adk.moko.slideback.SlideState;
+import com.kesco.adk.moko.slideback.Slider;
 import com.kesco.adk.moko.slideback.SliderKt;
 import com.kesco.xposed.slideback.domain.AppInfo;
 
@@ -61,7 +64,7 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         XC_MethodHook onCreateHookCallBack = new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                attachSlideLayout((Activity) param.thisObject);
+                attachToActivity((Activity) param.thisObject);
             }
         };
 
@@ -103,26 +106,16 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
         res.setReplacement(resId, modRes.fwd(resId));
     }
 
-    private void attachSlideLayout(final Activity act) {
-        Window win = act.getWindow();
-        ViewGroup decorView = (ViewGroup) win.getDecorView();
-        Drawable bg = decorView.getBackground();
-        win.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        decorView.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        View screenView = decorView.getChildAt(0);
-        decorView.removeViewAt(0);
-        SlideLayout slideLayout = new SlideLayout(act, screenView);
-        slideLayout.addView(screenView);
-        decorView.addView(slideLayout, 0);
-        screenView.setBackgroundDrawable(bg);
-        slideLayout.setSlideEdge(SlideEdge.LEFT);
-        slideLayout.setListener(new SlideListener() {
+    private void attachToActivity(final Activity act) {
+        Slider.INSTANCE$.attachToScreen(act, SlideEdge.LEFT, SlideShadow.FULL, new SlideListener() {
             @Override
             public void onSlideStart() {
+
             }
 
             @Override
             public void onSlide(float percent, @NotNull SlideState state) {
+
             }
 
             @Override
@@ -132,7 +125,6 @@ public class SlideBackInjection implements IXposedHookZygoteInit, IXposedHookLoa
                 act.overridePendingTransition(0, 0);
             }
         });
-        SliderKt.convertActivityFromTranslucent(act);
     }
 
     private Set<String> loadSlideAppStrList() {
