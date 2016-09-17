@@ -52,7 +52,7 @@ class AppAdapter(val ctx: Context) : RecyclerView.Adapter<AppAdapter.AppVH>() {
         }
     }
 
-    override fun getItemCount(): Int = _apps.size()
+    override fun getItemCount(): Int = _apps.size
 
     class AppVH(view: View) : RecyclerView.ViewHolder(view) {
         val tvAppName: TextView by bindViewById(R.id.tv_app_name)

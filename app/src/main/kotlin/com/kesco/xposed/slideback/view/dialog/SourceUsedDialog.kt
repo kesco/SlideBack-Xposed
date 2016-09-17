@@ -16,7 +16,7 @@ import com.kesco.xposed.slideback.R
 
 class SourceUsedDialog : DialogFragment(), DialogInterface.OnClickListener {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog? {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         builder.setTitle(R.string.software_license)
         builder.setAdapter(DialogAdapter(), this)
